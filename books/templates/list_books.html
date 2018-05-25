@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Of Books</title>
+</head>
+<body>
+<h1>List Of Books</h1>
+
+We have <b>{{ count }}</b> books in list for now.
+<p/>
+Average price of books is <b>{{avg}}</b>
+
+
+<ul>
+{% for book in books %}
+    <li>{{book.title}} - {{book.price}}  </li>
+{% endfor %}
+</ul>
+</body>
+</html>
