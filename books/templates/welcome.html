@@ -15,6 +15,9 @@ This is a demo application using Django 2.0.
     <li>Models</li>
     <li>Ajax</li>
 </ul>
+{% autoescape on %}
+{{ "<h1>Heading&</h1>" | safe }}
+{% endautoescape %}
 
 </body>
 </html>

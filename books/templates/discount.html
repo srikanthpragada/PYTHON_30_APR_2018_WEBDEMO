@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discount Calculation</title>
+</head>
+<body>
+<h1>Discount Calculation</h1>
+<form action="/books/discount/">
+    Amount <br/>
+    <input type="text" name="amount"  value="{{amount}}"/>
+    <p></p>
+    <input type="submit" value="Calculate" />
+    {% if not discount is None %}
+       <h3> Discount =  {{discount}} </h3>
+    {% endif %}
+</form>
+
+</body>
+</html>
