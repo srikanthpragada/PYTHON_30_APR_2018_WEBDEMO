@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1>Discount Calculation</h1>
-<form action="/books/discount/">
+<form action="/books/discount/" method="post">
+    {% csrf_token %}
     Amount <br/>
     <input type="text" name="amount"  value="{{amount}}"/>
     <p></p>

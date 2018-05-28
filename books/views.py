@@ -20,10 +20,10 @@ def list_books(request):
 
 
 def discount(request):
-    if 'amount' in request.GET:
-        amount = int(request.GET["amount"])
+    if 'amount' in request.POST:
+        amount = int(request.POST["amount"])
         discount = amount * 0.10
         return render(request, 'discount.html',
-                       { 'amount': amount, 'discount': discount})
+                      {'amount': amount, 'discount': discount})
     else:
         return render(request, 'discount.html')
