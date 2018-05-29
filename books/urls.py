@@ -8,5 +8,6 @@ urlpatterns = [
     path("dblist/", dbviews.list_books),
     re_path("details/([0-9]+)/", dbviews.show_details),
     path("error/", dbviews.error),
+    path("addbook/", dbviews.add_book),
 
 ]
