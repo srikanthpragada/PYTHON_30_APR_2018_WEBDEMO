@@ -1,22 +1,16 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-import sqlite3
-from . models import DbBook
-from . forms import AddBookForm
+from .models import DbBook
+from .forms import AddBookForm
+from . import database
 
 
 def list_books(request):
-    try:
-        con = sqlite3.connect(r"e:\classroom\python\demo.db")
-        cur = con.cursor()
-        cur.execute("select * from books order by title")
-        return render(request, 'db/db_list_books.html',
-                      {"books": cur.fetchall()})
-    except Exception as ex:
-        print(ex)
-        return HttpResponseRedirect("/books/error/")
-    finally:
-        con.close()
+    books = database.get_all_books()
+    if books is None:
+        return HttpResponseRedirect('db/error')
+    else:
+        return render(request, 'db/db_list_books.html', {"books": books})
 
 
 def error(request):
@@ -24,21 +18,29 @@ def error(request):
 
 
 def show_details(request, id):
-    try:
-        con = sqlite3.connect(r"e:\classroom\python\demo.db")
-        cur = con.cursor()
-        cur.execute("select * from books where bookid = ?", id)
-        row = cur.fetchone()
-        print("Row  is : " , row)
-        b = DbBook( row[0], row[1],row[2],row[3])
-        return render(request, 'db/db_book_details.html', {"book": b})
-    except Exception as ex:
-        print(ex)
-        return render(request, 'db/db_book_details.html', {"book": None })
-    finally:
-        con.close()
+    book = database.get_book(id)
+    return render(request, 'db/db_book_details.html', {"book": book})
 
 
 def add_book(request):
-    f = AddBookForm()
-    return render(request,'db/db_add_book.html', { 'form' : f})
+    if 'title' in request.POST:
+        f = AddBookForm(request.POST)  # Bound form
+        message = ""
+        if f.is_valid():
+            title = f.cleaned_data["title"]
+            author = f.cleaned_data["author"]
+            price = f.cleaned_data["price"]
+            done = database.add_book(title, author, price)
+            if done:
+                message = "Added Book Successfully!"
+            else:
+                message = "Sorry! Could not add book!"
+        else:
+            print("Validation error")
+            message = "Sorry! Invalid input. Please try again!"
+
+        return render(request, 'db/db_add_book.html',
+                      {'form': f, 'message': message})
+    else:
+        f = AddBookForm()
+        return render(request, 'db/db_add_book.html', {'form': f})

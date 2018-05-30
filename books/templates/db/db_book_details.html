@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Details</title>
-</head>
-<body>
+{% extends "db/base.html" %}
+{% block title%}Book Details {% endblock %}
+{% block content%}
 {% if book %}
-  <h1>Book Details</h1>
-  <h2>{{book.title}}</h2>
-  <h3>{{book.author}}</h3>
-  <h3>{{book.price | floatformat:0 }} INR</h3>
+  <h2>Title : {{book.title}}</h2>
+  <h3>Author: {{book.author}}</h3>
+  <h3>Price : {{book.price | floatformat:0 }} INR</h3>
 {%  endif %}
 {%  if not book %}
   <h2>Sorry! Book not found!</h2>
 {%  endif %}
 
-  <a href="/books/dblist/">List Of Books</a>
-</body>
-</html>
+{% endblock %}

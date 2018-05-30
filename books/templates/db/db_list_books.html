@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List Of Books</title>
-</head>
-<body>
+{% extends "db/base.html" %}
+{% block title%}List Of Books {% endblock %}
+{% block content%}
 <h1>List Of Books</h1>
 
 {% for book in books %}
@@ -12,5 +8,4 @@
     <br/>
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}
