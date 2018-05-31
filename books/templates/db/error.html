@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Error Page</title>
-</head>
-<body>
+{% extends "db/base.html" %}
+{% block title%}Error Page{% endblock %}
+{% block content%}
 <h1>Sorry! Something went wrong. Please try again! </h1>
-Error : {{error}}
-</body>
-</html>
+{% endblock content%}
+

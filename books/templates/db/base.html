@@ -1,25 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
     <meta charset="UTF-8">
     <title> {% block title%}Books{% endblock %}</title>
-    <style>
-        .banner
-         {  color:white; background-color:navy;
-            font-size:20pt; font-family:arial; font-weight:bold;
-            letter-spacing :5pt;
-         }
+    {% load static %}
+    <link rel="stylesheet" href='{% static "styles.css" %}' />
 
-         .menu
-         {  background-color:lightgray;
-            font-size:12pt; font-family:verdana; font-weight:bold;
-         }
-
-         body {
-          font-family : verdana; font-size : 12pt;
-          }
-
-    </style>
 </head>
 <body>
 <div class="banner">Books</div>

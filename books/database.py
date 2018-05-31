@@ -55,3 +55,20 @@ def add_book(title, author, price):
         return False
     finally:
         con.close()
+
+
+def delete_book(id):
+    try:
+        con = sqlite3.connect(DBNAME)
+        cur = con.cursor()
+        cur.execute("delete from books where bookid = ?",(id))
+        con.commit()
+        if cur.rowcount == 1:
+            return True
+        else:
+            return False
+    except Exception as ex:
+        print(ex)
+        return False
+    finally:
+        con.close()

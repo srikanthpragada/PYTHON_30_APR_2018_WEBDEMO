@@ -1,0 +1,15 @@
+        .banner
+         {  color:white; background-color:navy;
+            font-size:20pt; font-family:arial; font-weight:bold;
+            letter-spacing :5pt;
+         }
+
+         .menu
+         {  background-color:lightgray;
+            font-size:12pt; font-family:verdana; font-weight:bold;
+         }
+
+         body {
+          font-family : verdana; font-size : 12pt;
+          }
+

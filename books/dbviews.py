@@ -22,6 +22,16 @@ def show_details(request, id):
     return render(request, 'db/db_book_details.html', {"book": book})
 
 
+def delete_book(request, id):
+    # delete book
+    print("Deleting book ", id)
+    done = database.delete_book(id)
+    if done:
+        return HttpResponseRedirect('/books/dblist')
+    else:
+        return HttpResponseRedirect('/books/error')
+
+
 def add_book(request):
     if 'title' in request.POST:
         f = AddBookForm(request.POST)  # Bound form
