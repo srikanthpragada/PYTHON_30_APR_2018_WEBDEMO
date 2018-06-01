@@ -7,6 +7,14 @@ def welcome(request):
     return render(request, 'welcome.html')
 
 
+def ajax(request):
+    return render(request, 'ajax_demo.html')
+
+
+def get_message(request):
+    return HttpResponse("Winners never quit. Quitters never win!")
+
+
 def list_books(request):
     books = [Book("Java Complete Reference", 800),
              Book("Programming in C", 300),

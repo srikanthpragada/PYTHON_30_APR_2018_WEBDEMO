@@ -10,5 +10,7 @@ urlpatterns = [
     path("error/", dbviews.error),
     path("addbook/", dbviews.add_book),
     re_path("deletebook/([0-9]+)/", dbviews.delete_book),
+    path("ajax/", views.ajax ),
+    path("message/", views.get_message ),
 
 ]

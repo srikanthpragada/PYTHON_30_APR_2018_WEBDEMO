@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Demo</title>
+    {% load static %}
+    <script src="{% static 'jquery-3.3.1.js' %}"></script>
+    <script>
+        function test() {
+            $("h3").text("jQuery is working...");
+        }
+        function getmessage() {
+            $.get("/books/message",{}, showMessage);
+        }
+        function showMessage(msg) {
+            $("#message").text(msg)
+        }
+    </script>
+</head>
+<body>
+<h1>Ajax Demo</h1>
+<button onclick="test()">Test jQuery</button>
+<p/>
+<button onclick="getmessage()">Get Message</button>
+<h3 id="message"></h3>
+</body>
+</html>
