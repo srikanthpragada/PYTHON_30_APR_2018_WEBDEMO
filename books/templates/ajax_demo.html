@@ -15,6 +15,25 @@
         function showMessage(msg) {
             $("#message").text(msg)
         }
+        function getbook() {
+           id = $("#bookid").val()
+           // $.getJSON("/books/getbook/" + id,{}, showBook);
+           $.ajax(
+               {
+                 url : "/books/getbook/" + id,
+                 method : 'get',
+                 dataType : 'json',
+                 success : showBook,
+                 error : showError
+              }
+           );
+        }
+        function showError() {
+            $("#details").html("Sorry! Book not found!")
+        }
+        function showBook(book) {
+            $("#details").html(book.title + "<br/>" + book.author + "<br/>" + book.price);
+        }
     </script>
 </head>
 <body>
@@ -23,5 +42,13 @@
 <p/>
 <button onclick="getmessage()">Get Message</button>
 <h3 id="message"></h3>
+<h2>Book Client</h2>
+Book ID <input type="number" id="bookid" />
+<button onclick="getbook()">Details </button>
+<p/>
+<div id="details">
+
+</div>
+
 </body>
 </html>

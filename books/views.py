@@ -1,10 +1,19 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from .models import Book
+from . import database
 
 
 def welcome(request):
     return render(request, 'welcome.html')
+
+
+def getbook(request, id):
+    book = database.get_book(id)
+    if book is None:
+        return HttpResponseNotFound()  # Response with 404 status code to client
+    else:
+        return JsonResponse({"title": book.title, "price": book.price , "author" : book.author})
 
 
 def ajax(request):
