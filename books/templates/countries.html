@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries Information</title>
+    {% load static %}
+    <script src="{% static 'jquery-3.3.1.js' %}"></script>
+    <script>
+        function search() {
+          $.ajax(
+               {
+                 url : "/books/searchcountries/" + $("#cname").val(),
+                 method : 'get',
+                 dataType : 'json',
+                 success : showCountries,
+                 error : showError
+              }
+           ); // ajax()
+        } // search()
+
+        function showCountries(countries) {
+           output = "";
+           $.each(countries,
+               function(idx,country) {
+                    // output += "<a onclick=getCountryInfo('" + country.code + "')>" + country.name + "</a><br/>";
+                    output += "<a  href=/books/countryinfo/" +  country.code + ">" + country.name + "</a><br/>";
+               }
+          );
+          $("#countries").html(output);
+        }
+
+        function showError() {
+             $("#countries").html("Sorry! Could not retrieve countries information!");
+        }
+
+        function  getCountryInfo(code) {
+             alert("Getting info about " + code);
+        }
+    </script>
+</head>
+<body>
+<h1>Countries Information</h1>
+Country Name <input type="text" id="cname"/>
+<button onclick="search()">Search</button>
+<p/>
+<table width="100%">
+    <tr>
+        <td>
+             <div id="countries">
+
+             </div>
+        </td>
+        <td>
+            <div  id="countryinfo">
+
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>

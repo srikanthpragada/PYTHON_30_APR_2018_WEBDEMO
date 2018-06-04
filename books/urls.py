@@ -13,5 +13,8 @@ urlpatterns = [
     path("ajax/", views.ajax ),
     path("message/", views.get_message ),
     re_path("getbook/([0-9]+)/", views.getbook),
+    path("countries/", views.countries ),
+    re_path(r"searchcountries/([\w]+)/", views.searchCountries),
+    re_path(r"countryinfo/([\w]+)/", views.countryinfo),
 
 ]

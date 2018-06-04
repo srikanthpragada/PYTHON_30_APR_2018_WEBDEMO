@@ -2,10 +2,35 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from .models import Book
 from . import database
+import requests
 
 
 def welcome(request):
     return render(request, 'welcome.html')
+
+
+def countries(request):
+    return render(request, 'countries.html')
+
+
+def searchCountries(request, cname):
+    resp = requests.get("https://restcountries.eu/rest/v2/name/" + cname)
+    if resp.status_code == 200:
+        countries = []
+        for c in resp.json():
+            country = {'name': c['name'], 'code': c['alpha3Code']}
+            countries.append(country)
+        return JsonResponse(countries, safe=False)
+    else:
+        return HttpResponseNotFound()
+
+
+def countryinfo(request, code):
+    resp = requests.get("https://restcountries.eu/rest/v2/alpha/" + code)
+    if resp.status_code == 200:
+        return render(request, 'countryinfo.html', {'country': resp.json()})
+    else:
+        return HttpResponseNotFound()
 
 
 def getbook(request, id):
@@ -13,7 +38,7 @@ def getbook(request, id):
     if book is None:
         return HttpResponseNotFound()  # Response with 404 status code to client
     else:
-        return JsonResponse({"title": book.title, "price": book.price , "author" : book.author})
+        return JsonResponse({"title": book.title, "price": book.price, "author": book.author})
 
 
 def ajax(request):
