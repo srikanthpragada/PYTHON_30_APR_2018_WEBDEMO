@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from . import views, dbviews
+from . import views, dbviews, state_views
 
 urlpatterns = [
     path("welcome/", views.welcome),
@@ -16,5 +16,9 @@ urlpatterns = [
     path("countries/", views.countries ),
     re_path(r"searchcountries/([\w]+)/", views.searchCountries),
     re_path(r"countryinfo/([\w]+)/", views.countryinfo),
+    re_path(r"countryinfo/([\w]+)/", views.countryinfo),
+    path("selectcity/", state_views.selectcity),
+    path("savecity/", state_views.savecity),
+    path("showmovies/", state_views.showmovies),
 
 ]

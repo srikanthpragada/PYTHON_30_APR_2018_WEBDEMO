@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select City</title>
+</head>
+<body>
+<h2>Select Your City</h2>
+<form action="/books/savecity/" method="post">
+    {% csrf_token %}
+    Select City
+     <select name="city">
+         <option value="vizag">Vizag</option>
+         <option value="hyd">Hyderabad</option>
+         <option value="bang">Bangalore</option>
+         <option value="chennai">Chennai</option>
+     </select>
+    <input type="submit" value="Save" />
+</form>
+
+</body>
+</html>
