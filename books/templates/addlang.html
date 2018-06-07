@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Language</title>
+</head>
+<body>
+<h2>Add Langauge</h2>
+<form action="." method="post">
+    {% csrf_token %}
+    Language <input type="text" name="lang" />
+    <input type="submit" value="Add" />
+</form>
+<p/>
+<a href="/books/listlangs">List Languages</a>
+</body>
+</html>

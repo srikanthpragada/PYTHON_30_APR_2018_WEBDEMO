@@ -20,5 +20,7 @@ urlpatterns = [
     path("selectcity/", state_views.selectcity),
     path("savecity/", state_views.savecity),
     path("showmovies/", state_views.showmovies),
+    path("addlang/", state_views.addlang),
+    path("listlangs/", state_views.listlangs),
 
 ]

@@ -2,6 +2,30 @@ from django.shortcuts import render
 from django.http import HttpResponse,  HttpResponseRedirect
 from datetime import datetime,timedelta
 
+def addlang(request):
+    # find out whether langs is present in session
+    if 'langs' in request.session:
+        langs = request.session['langs']
+    else:
+        langs = []
+
+    if 'lang' in  request.POST:
+        langs.append( request.POST['lang'])
+
+    request.session['langs'] = langs
+    return render(request,'addlang.html')
+
+
+def listlangs(request):
+    if 'langs' in  request.session:
+        langs = request.session["langs"]
+    else:
+        langs = []
+
+    return render(request,'listlangs.html', { "langs" : langs})
+
+
+
 def selectcity(request):
     return render(request,'selectcity.html')
 
