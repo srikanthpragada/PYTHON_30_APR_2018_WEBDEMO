@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>List Jobs </h2>
+
+{% for j in object_list %}
+    {{j.jobtitle }}
+    <p/>
+{% endfor %}
+
+{% endblock %}

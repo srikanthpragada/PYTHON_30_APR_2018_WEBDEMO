@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>HR Manager</title>
+    <style>
+        .banner { background-color:red;color:white; font-size:20pt}
+        .menu { background-color: #eeeeee; padding : 5px}
+    </style>
 </head>
 <body>
-<div>HR Manager</div>
+<div class="banner"> HR Manager</div>
+<div class="menu">
+<a href="/hr/about">About</a>
+<a href="/hr/addjob">Add Job</a>
+<a href="/hr/listjobs">List Jobs</a>
+<a href="/hr/searchjobs">Search Jobs</a>
+</div>
+
 {% block  content %}
 {% endblock %}
 
