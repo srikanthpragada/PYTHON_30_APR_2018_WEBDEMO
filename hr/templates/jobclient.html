@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Client</title>
+    <script  src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script>
+
+        $(
+           function() {
+            getJobs();
+           }
+        );
+
+
+        function addJob() {
+          $.ajax(
+           {
+             url : "/hr/jobs/",
+             method : 'POST',
+             data : {
+                      'jobid' : $("#jobid").val(),
+                      'jobtitle' : $("#jobtitle").val(),
+                      'minsal' : $("#minsal").val()
+                     },
+             success : function(resp) {
+                alert("Job has been added successfully");
+             },
+             error: function(err) {
+                alert("Sorry! Could not add job");
+             }
+          } // settings
+         ); // ajax()
+        } // addJob()
+
+        function getJobs() {
+           $("#jobsTable").html(""); // clear data
+
+           $.getJSON("/hr/jobs/",{},
+              function(jobs) {
+                 // process jobs
+                 $.each(jobs,
+                       function(idx,job) {
+                           $("#jobsTable").append(
+                                "<tr><td>" + job.jobid +  "</td><td>"
+                                + job.jobtitle + "</td><td>"
+                                + job.minsal + "</td></tr>");
+                       }
+                  );
+             }
+           ) // getJson()
+        }
+
+    </script>
+</head>
+<body>
+<h2>List of Jobs</h2>
+<table border="1" width="100%">
+    <tr><th>Id</th><th>Title</th> <th>Min Salary</th></tr>
+    <tbody id="jobsTable">
+
+    </tbody>
+</table>
+
+<h2>Add Job </h2>
+Job Id <br/>
+<input type="text" id="jobid"/> <br/>
+Job Title <br/>
+<input type="text" id="jobtitle"/> <br/>
+Min Salary <br/>
+<input type="text" id="minsal"/>'
+<p/>
+<button onclick="addJob()">Add Job</button>
+
+</body>
+</html>
